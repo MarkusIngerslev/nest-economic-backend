@@ -9,6 +9,15 @@ The frontend part of the Economic Dashboard can be found in the following reposi
 ## Table of Contents
 
 1. [Endpoints](#endpoints) _Work in progress_
+
+   - [Authentication & User management](#authentication--user-management)
+   - [Income & Expense management](#income--expense-management)
+   - [Categories](#categories)
+   - [Statistics](#statistics)
+   - [Transactions](#transactions)
+   - [Automaic notifications/reminders](#automaic-notificationsreminders)
+   - [Export Data](#export-data)
+
 1. [Installation](#installation) _Still missing_
 1. [Running the app](#running-the-app) _Still missing_
 1. [Test](#test) _Still missing_
