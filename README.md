@@ -1,98 +1,200 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<h1 align="center">
+  NestJS, TypeORM, Postgres & Docker Backend part of Economic Dashboard
+</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+In this repository, you will find the backend part of the Economic Dashboard. The backend is built with NestJS, TypeORM, Postgres & Docker. The backend is responsible for handling all the business logic and data storage for the Economic Dashboard. The backend is built with a modular architecture, which makes it easy to add new features and endpoints.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The frontend part of the Economic Dashboard can be found in the following repository: [Economic Dashboard Frontend](https://github.com/MarkusIngerslev/next-economic-frontend).
 
-## Description
+## Table of Contents
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. [Endpoints](#endpoints) _Work in progress_
+1. [Installation](#installation) _Still missing_
+1. [Running the app](#running-the-app) _Still missing_
+1. [Test](#test) _Still missing_
+1. [TODO](#todo) _Work in progress_
 
-## Project setup
+## Endpoints
 
-```bash
-$ pnpm install
+In this section, you will find a complet list of all the endpoints that are available in the backend. The endpoints are divided into different sections based on their functionality. Most of the endpoints are protected and require a valid JWT-token to access. The only endpoints that are not protected are the ones for authentication.
+
+Some of the sections will also display a json scheme, to showcase what the request body should look like when sending a request to the endpoint. The json scheme is only a guideline and not a strict requirement. The json scheme is only there to help you understand what the request body should look like.
+
+### Authentication & User management
+
+Endpoints for authentication and user management.
+
+- `GET /auth/me` - Fetch information about the current user
+- `POST /auth/login` - Login and get JWT-token
+- `POST /auth/logout` - Logout the current user
+
+### Income & Expense management
+
+Endpoints for managing incomes and expenses.
+
+#### Income
+
+- `GET /incomes` - Fetch all incomes
+- `POST /incomes` - Create a new income
+- `GET /incomes/:id` - Fetch a single income
+- `PUT /incomes/:id` - Update a single income
+- `DELETE /incomes/:id` - Delete a single income
+
+##### JSON Schema for income
+
+```json
+{
+  "amount": 25000,
+  "category": "Løn",
+  "date": "2025-03-01",
+  "description": "Løn fra arbejde"
+}
 ```
 
-## Compile and run the project
+#### Expense
 
-```bash
-# development
-$ pnpm run start
+- `GET /expenses` - Fetch all expenses
+- `POST /expenses` - Create a new expense
+- `GET /expenses/:id` - Fetch a single expense
+- `PUT /expenses/:id` - Update a single expense
+- `DELETE /expenses/:id` - Delete a single expense
 
-# watch mode
-$ pnpm run start:dev
+##### JSON Schema for expense
 
-# production mode
-$ pnpm run start:prod
+```json
+{
+  "amount": 150,
+  "category": "Mad",
+  "date": "2025-03-02",
+  "description": "McDonalds"
+}
 ```
 
-## Run tests
+#### Categories
 
-```bash
-# unit tests
-$ pnpm run test
+- `GET /categories` - Fetch all categories
+- `POST /categories` - Create a new category
+- `GET /categories/:id` - Fetch a single category
+- `PUT /categories/:id` - Update a single category
+- `DELETE /categories/:id` - Delete a single category
 
-# e2e tests
-$ pnpm run test:e2e
+##### JSON Schema for category
 
-# test coverage
-$ pnpm run test:cov
+```json
+{
+  "name": "Transport"
+}
 ```
 
-## Deployment
+#### Statistics
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- `GET /statistics` - Fetch a summery of the users incomes and expenses (total income, total expense, total balance)
+- `GET /statistics/:month` - Fetch a specific months summery
+- `POST /statistics/budget` - Create a new budget for a month/category
+- `GET /statistics/budget/:month` - Fetch a specific months budget
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+##### JSON Schema for budget
 
-```bash
-$ pnpm install -g mau
-$ mau deploy
+```json
+{
+  "month": "2025-03",
+  "category": "Mad",
+  "amount": 2000
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### Transaktions
 
-## Resources
+- `GET /transactions` - Fetch all transactions
+- `GET /transactions/:id` - Fetch a single transaction
+- `POST /transactions` - Create a new transaction
+- `PUT /transactions/:id` - Update a single transaction
+- `DELETE /transactions/:id` - Delete a single transaction
 
-Check out a few resources that may come in handy when working with NestJS:
+##### JSON Schema for transaction
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```json
+{
+  "type": "expense",
+  "amount": 500,
+  "category": "Shopping",
+  "date": "2025-03-10",
+  "description": "Køb af nye sko"
+}
+```
 
-## Support
+#### Automaic notifications/reminders
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+These are endpoints for automatic notifications/reminders about budget overspending and such.
 
-## Stay in touch
+- `GET /notifications` - Fetch all notifications
+- `POST /notifications` - Create a new notification
+- `DELETE /notifications/:id` - Delete a single notification
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Export Data
 
-## License
+These are endpoints for exporting data to a file in different formats.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `GET /export/csv` - Exports all transaktions to a CSV-file
+- `GET /export/pdf` - Exports all transaktions to a PDF-file
+
+#### Dashboard (Frontend)
+
+These are endpoints for the frontend dashboard.
+
+- `GET /dashboard/stats` - Fetch statistics for the dashboard
+- `GET /dashboard/trends` - Fetch budgets for the dashboard
+
+## Installation
+
+## Running the app
+
+## Test
+
+## TODO
+
+This todo list is a list of things left to implement in the backend.
+
+1. [ ] Implement the endpoints for the authentication
+   - [ ] Implement the endpoint for fetching the current user
+   - [ ] Implement the endpoint for logging in
+   - [ ] Implement the endpoint for logging out
+1. [ ] Implement the endpoints for the incomes
+   - [ ] Implement the endpoint for fetching all incomes
+   - [ ] Implement the endpoint for fetching a single income
+   - [ ] Implement the endpoint for creating a new income
+   - [ ] Implement the endpoint for updating a single income
+   - [ ] Implement the endpoint for deleting a single income
+1. [ ] Implement the endpoints for the expenses
+   - [ ] Implement the endpoint for fetching all expenses
+   - [ ] Implement the endpoint for fetching a single expense
+   - [ ] Implement the endpoint for creating a new expense
+   - [ ] Implement the endpoint for updating a single expense
+   - [ ] Implement the endpoint for deleting a single expense
+1. [ ] Implement the endpoints for the categories
+   - [ ] Implement the endpoint for fetching all categories
+   - [ ] Implement the endpoint for fetching a single category
+   - [ ] Implement the endpoint for creating a new category
+   - [ ] Implement the endpoint for updating a single category
+   - [ ] Implement the endpoint for deleting a single category
+1. [ ] Implement the endpoints for the statistics
+   - [ ] Implement the endpoint for fetching the statistics
+   - [ ] Implement the endpoint for fetching a specific months statistics
+   - [ ] Implement the endpoint for creating a new budget
+   - [ ] Implement the endpoint for fetching a specific months budget
+1. [ ] Implement the endpoints for the transactions
+   - [ ] Implement the endpoint for fetching all transactions
+   - [ ] Implement the endpoint for fetching a single transaction
+   - [ ] Implement the endpoint for creating a new transaction
+   - [ ] Implement the endpoint for updating a single transaction
+   - [ ] Implement the endpoint for deleting a single transaction
+1. [ ] Implement the endpoints for the notifications
+   - [ ] Implement the endpoint for fetching all notifications
+   - [ ] Implement the endpoint for creating a new notification
+   - [ ] Implement the endpoint for deleting a single notification
+1. [ ] Implement the endpoints for the export data
+   - [ ] Implement the endpoint for exporting all transactions to a CSV-file
+   - [ ] Implement the endpoint for exporting all transactions to a PDF-file
+1. [ ] Implement the endpoints for the dashboard
+   - [ ] Implement the endpoint for the stats
+   - [ ] Implement the endpoint for the trends
