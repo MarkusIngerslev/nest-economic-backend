@@ -7,14 +7,14 @@ export class User {
   id?: UUID;
 
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
-  @Column()
   firstName: string;
 
   @Column()
   lastName: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 }

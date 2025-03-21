@@ -11,4 +11,10 @@ export class UsersController {
   getProfile(@Request() req) {
     return req.user;
   }
+
+  @UseGuards(JwtGuard)
+  @Get()
+  async getUsers() {
+    return await this.usersService.findAll();
+  }
 }
