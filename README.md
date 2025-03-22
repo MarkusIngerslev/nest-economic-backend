@@ -164,9 +164,15 @@ These are endpoints for the frontend dashboard.
 
 This todo list is a list of things left to implement in the backend.
 
+1. [ ] Implement JWT and role based authentication
+   - [x] Implement JWT authentication
+   - [x] Implement role based authentication
+   - [x] Implement guards for the endpoints
+   - [ ] Implement so admin role can access all endpoints (also the ones not specified as admin only)
 1. [ ] Implement the endpoints for the authentication
    - [ ] Implement the endpoint for fetching the current user
-   - [ ] Implement the endpoint for logging in
+   - [ ] Implement the endpoint for all users (admin only)
+   - [x] Implement the endpoint for logging in
    - [ ] Implement the endpoint for logging out
 1. [ ] Implement the endpoints for the incomes
    - [ ] Implement the endpoint for fetching all incomes
