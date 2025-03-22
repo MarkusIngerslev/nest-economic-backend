@@ -4,7 +4,8 @@ import * as bcrypt from 'bcryptjs';
 import { User } from '../users/users.entity';
 import { AccessToken } from './types/AccessToken';
 import { UsersService } from '../users/users.service';
-import { RegisterRequestDto } from './dtos/register-request.dto';
+import { RegisterRequestDTO } from './dtos/register-request.dto';
+import { Role } from './roles/roles.enum';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<User> {
-    const user: User | null= await this.usersService.findOneByEmail(email);
+    const user: User | null = await this.usersService.findOneByEmail(email);
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -26,17 +27,28 @@ export class AuthService {
   }
 
   async login(user: User): Promise<AccessToken> {
-    const payload = { email: user.email, id: user.id };
+    const payload = { email: user.email, id: user.id, roles: user.roles };
     return { access_token: this.jwtService.sign(payload) };
   }
 
-  async register(user: RegisterRequestDto): Promise<AccessToken> {
+  async register(user: RegisterRequestDTO): Promise<AccessToken> {
     const existingUser = await this.usersService.findOneByEmail(user.email);
     if (existingUser) {
       throw new BadRequestException('email already exists');
     }
+
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    const newUser: User = { ...user, password: hashedPassword };
+    const roles =
+      Array.isArray(user.roles) && user.roles.length > 0
+        ? user.roles
+        : [Role.USER];
+
+    const newUser: User = {
+      ...user,
+      password: hashedPassword,
+      roles,
+    };
+
     await this.usersService.create(newUser);
     return this.login(newUser);
   }

@@ -1,19 +1,24 @@
 import { Controller, Get, UseGuards, Request } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtGuard } from '../auth/guard/jwt.guard';
+import { RolesGuard } from '../auth/guard/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Role } from '../auth/roles/roles.enum';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(JwtGuard)
   @Get('profile')
+  @UseGuards(JwtGuard, RolesGuard)
+  @Roles(Role.USER, Role.ADMIN, Role.BACKEND)
   getProfile(@Request() req) {
     return req.user;
   }
 
-  @UseGuards(JwtGuard)
   @Get()
+  @UseGuards(JwtGuard, RolesGuard)
+  @Roles(Role.ADMIN)
   async getUsers() {
     return await this.usersService.findAll();
   }
