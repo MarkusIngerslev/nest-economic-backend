@@ -11,7 +11,7 @@ export class UsersController {
 
   @Get('profile')
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles(Role.USER, Role.ADMIN, Role.BACKEND)
+  @Roles(Role.USER)
   getProfile(@Request() req) {
     return req.user;
   }
