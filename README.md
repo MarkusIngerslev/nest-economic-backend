@@ -33,9 +33,11 @@ Some of the sections will also display a json scheme, to showcase what the reque
 
 Endpoints for authentication and user management.
 
-- `GET /auth/me` - Fetch information about the current user
+- `GET /users` - Fetch information about all users (admin only)
+- `GET /users/profile` - Fetch information about the current user
+- `POST /auth/admin/update-user-roles/:id` - Update a single users role (admin only)
+- `POST /auth/register` - Register a new user **firstName**, **lastName**, **email**, **password**
 - `POST /auth/login` - Login and get JWT-token
-- `POST /auth/logout` - Logout the current user
 
 ### Income & Expense management
 
@@ -169,11 +171,11 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement role based authentication
    - [x] Implement guards for the endpoints
    - [x] Implement so admin role can access all endpoints (also the ones not specified as admin only)
-1. [ ] Implement the endpoints for the authentication
+1. [x] Implement the endpoints for the authentication
    - [x] Implement the endpoint for fetching the current logged ind user
    - [x] Implement the endpoint for fetching all users (admin only)
+   - [x] Implement the endpoint for updating a single user role (admin only)
    - [x] Implement the endpoint for logging in
-   - [ ] Implement the endpoint for logging out
 1. [ ] Implement the endpoints for the incomes
    - [ ] Implement the endpoint for fetching all incomes
    - [ ] Implement the endpoint for fetching a single income
