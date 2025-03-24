@@ -27,7 +27,7 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  update(userId: UUID, userInformation: Partial<User>): Promise<UpdateResult> {
-    return this.usersRepository.update(userId, userInformation);
+  update(id: UUID, userInformation: Partial<User>): Promise<UpdateResult> {
+    return this.usersRepository.update(id, userInformation);
   }
 }
