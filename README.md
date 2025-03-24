@@ -35,7 +35,7 @@ Endpoints for authentication and user management.
 
 - `GET /users` - Fetch information about all users (admin only)
 - `GET /users/profile` - Fetch information about the current user
-- `POST /auth/admin/update-user-roles/:id` - Update a single users role (admin only)
+- `PUT /auth/admin/update-user-roles/:id` - Update a single users role (admin only)
 - `POST /auth/register` - Register a new user **firstName**, **lastName**, **email**, **password**
 - `POST /auth/login` - Login and get JWT-token
 
