@@ -15,6 +15,9 @@ export class Income {
   @Column({ nullable: true })
   description: string;
 
+  @Column({ type: 'date', nullable: true })
+  date?: Date;
+
   @ManyToOne(() => User, (user) => user.incomes, { onDelete: 'CASCADE' })
   user: User;
 }

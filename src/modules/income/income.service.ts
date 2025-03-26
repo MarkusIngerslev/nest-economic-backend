@@ -15,9 +15,15 @@ export class IncomeService {
     private userRepo: Repository<User>,
   ) {}
 
-  async createIncome(userId: UUID, data: CreateIncomeDto) {
+  async createIncome(userId: string, data: CreateIncomeDto) {
     const user = await this.userRepo.findOneOrFail({ where: { id: userId } });
-    const income = this.incomeRepo.create({ ...data, user });
+
+    const income = this.incomeRepo.create({
+      ...data,
+      date: data.date ?? new Date(),
+      user,
+    });
+
     return this.incomeRepo.save(income);
   }
 
