@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateIncomeDto } from './dtos/create-income.dto';
+import { UpdateIncomeDto } from './dtos/update-income.dto';
 import { Income } from './income.entity';
 import { User } from '../users/users.entity';
 import { UUID } from 'crypto';
@@ -60,5 +61,25 @@ export class IncomeService {
     }
 
     return income;
+  }
+
+  async updateIncome(
+    incomeId: string,
+    userId: string,
+    dto: UpdateIncomeDto,
+    isAdmin = false,
+  ) {
+    const income = await this.getIncomeByIdForUser(incomeId, userId, isAdmin);
+    Object.assign(income, dto);
+    return this.incomeRepo.save(income);
+  }
+
+  async deleteIncome(
+    incomeId: string,
+    userId: string,
+    isAdmin = false,
+  ): Promise<void> {
+    const income = await this.getIncomeByIdForUser(incomeId, userId, isAdmin);
+    await this.incomeRepo.remove(income);
   }
 }
