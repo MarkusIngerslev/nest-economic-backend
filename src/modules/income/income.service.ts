@@ -30,6 +30,7 @@ export class IncomeService {
   async getIncomesForUser(userId: UUID) {
     return this.incomeRepo.find({
       where: { user: { id: userId } },
+      order: { date: 'DESC' },
     });
   }
 
