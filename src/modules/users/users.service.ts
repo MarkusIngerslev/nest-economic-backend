@@ -23,7 +23,11 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id });
   }
 
-  create(user: User): Promise<User> {
+  create(data: Partial<User>): User {
+    return this.usersRepository.create(data);
+  }
+
+  async save(user: User): Promise<User> {
     return this.usersRepository.save(user);
   }
 

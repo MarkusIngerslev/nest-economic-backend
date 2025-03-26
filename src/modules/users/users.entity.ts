@@ -1,11 +1,12 @@
 import { UUID } from 'crypto';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Role } from '../auth/roles/roles.enum';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Income } from '../income/income.entity';
 
 @Entity({ name: 'user' })
 export class User {
-  @PrimaryGeneratedColumn()
-  id?: UUID;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   firstName: string;
@@ -20,9 +21,12 @@ export class User {
   password: string;
 
   @Column({
-    type: 'text', // Brug 'text' i stedet for 'enum'
+    type: 'text',
     array: true,
     default: [Role.USER],
   })
   roles: Role[];
+
+  @OneToMany(() => Income, (income) => income.user)
+  incomes?: Income[];
 }

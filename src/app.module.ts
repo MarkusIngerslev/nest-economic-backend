@@ -7,6 +7,8 @@ import { UsersModule } from './modules/users/users.module';
 import { JwtGuard } from './modules/auth/guard/jwt.guard';
 import { RolesGuard } from './modules/auth/guard/roles.guard';
 import { User } from './modules/users/users.entity';
+import { IncomeModule } from './modules/income/income.module';
+import { Income } from './modules/income/income.entity';
 
 @Module({
   imports: [
@@ -21,12 +23,13 @@ import { User } from './modules/users/users.entity';
         username: configService.get<string>('DB_USER'), // Dette manglede
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        entities: [User, Income],
         synchronize: true,
       }),
     }),
     UsersModule,
     AuthModule,
+    IncomeModule,
   ],
   providers: [
     {

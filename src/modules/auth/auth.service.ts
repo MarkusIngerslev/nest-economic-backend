@@ -45,13 +45,13 @@ export class AuthService {
         ? user.roles
         : [Role.USER];
 
-    const newUser: User = {
+    const newUser = this.usersService.create({
       ...user,
       password: hashedPassword,
       roles,
-    };
+    });
 
-    await this.usersService.create(newUser);
+    await this.usersService.save(newUser);
     return this.login(newUser);
   }
 
