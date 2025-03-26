@@ -10,15 +10,15 @@ import { Role } from '../auth/roles/roles.enum';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
-
   @Get()
   @UseGuards(RolesGuard)
   @Roles(Role.ADMIN)
   async getUsers() {
     return await this.usersService.findAll();
+  }
+
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }

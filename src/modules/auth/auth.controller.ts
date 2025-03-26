@@ -41,13 +41,6 @@ export class AuthController {
     return await this.authService.register(registerBody);
   }
 
-  @Post('admin/create-user')
-  @UseGuards(JwtGuard, RolesGuard)
-  @Roles(Role.ADMIN)
-  async adminRegisterUSer(@Body() registerBody: RegisterRequestDTO) {
-    return await this.authService.register(registerBody);
-  }
-
   @Put('admin/update-user-roles/:id')
   @UseGuards(JwtGuard, RolesGuard)
   @Roles(Role.ADMIN)

@@ -46,8 +46,10 @@ Endpoints for managing incomes and expenses.
 #### Income
 
 - `GET /incomes` - Fetch all incomes
-- `POST /incomes` - Create a new income
+- `GET /incomes/me` - Fetch all incomes for logged in user
 - `GET /incomes/:id` - Fetch a single income
+- `GET /incomes/user/:userId` - Fetch all incomes for a single user (admin only)
+- `POST /incomes` - Create a new income
 - `PUT /incomes/:id` - Update a single income
 - `DELETE /incomes/:id` - Delete a single income
 
@@ -176,12 +178,14 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement the endpoint for fetching all users (admin only)
    - [x] Implement the endpoint for updating a single user role (admin only)
    - [x] Implement the endpoint for logging in
-1. [ ] Implement the endpoints for the incomes
-   - [x] Implement the endpoint for fetching all incomes
+1. [x] Implement the endpoints for the incomes
+   - [x] Implement the endpoint for fetching all incomes (admin only)
+   - [x] Implement the endpoint for fetching all of a users incomes
+   - [x] Implement the endpoint for fetching a single users incomes (admin only)
    - [x] Implement the endpoint for creating a new income
-   - [ ] Implement the endpoint for fetching a single income
-   - [ ] Implement the endpoint for updating a single income
-   - [ ] Implement the endpoint for deleting a single income
+   - [x] Implement the endpoint for fetching a single income
+   - [x] Implement the endpoint for updating a single income
+   - [x] Implement the endpoint for deleting a single income
 1. [ ] Implement the endpoints for the expenses
    - [ ] Implement the endpoint for fetching all expenses
    - [ ] Implement the endpoint for fetching a single expense
