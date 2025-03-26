@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateIncomeDto } from './dtos/create-income.dto';
@@ -35,6 +35,30 @@ export class IncomeService {
   }
 
   async getAllIncomes() {
-    return this.incomeRepo.find({ relations: ['user'] });
+    return this.incomeRepo.find({
+      relations: ['user'],
+      order: { date: 'DESC' },
+    });
+  }
+
+  async getIncomeByIdForUser(
+    incomeId: string,
+    requesterId: string,
+    isAdmin = false,
+  ) {
+    const whereClause = isAdmin
+      ? { id: incomeId }
+      : { id: incomeId, user: { id: requesterId } };
+
+    const income = await this.incomeRepo.findOne({
+      where: whereClause,
+      relations: ['user'],
+    });
+
+    if (!income) {
+      throw new NotFoundException('Income not found');
+    }
+
+    return income;
   }
 }

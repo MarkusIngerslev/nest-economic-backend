@@ -177,9 +177,9 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement the endpoint for updating a single user role (admin only)
    - [x] Implement the endpoint for logging in
 1. [ ] Implement the endpoints for the incomes
-   - [ ] Implement the endpoint for fetching all incomes
+   - [x] Implement the endpoint for fetching all incomes
+   - [x] Implement the endpoint for creating a new income
    - [ ] Implement the endpoint for fetching a single income
-   - [ ] Implement the endpoint for creating a new income
    - [ ] Implement the endpoint for updating a single income
    - [ ] Implement the endpoint for deleting a single income
 1. [ ] Implement the endpoints for the expenses
