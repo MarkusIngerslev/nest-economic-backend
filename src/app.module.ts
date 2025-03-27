@@ -10,6 +10,7 @@ import { User } from './modules/user/user.entity';
 import { IncomeModule } from './modules/income/income.module';
 import { Income } from './modules/income/income.entity';
 import { Expense } from './modules/expense/expense.entity';
+import { Category } from './modules/category/category.entity';
 import { ExpenseModule } from './modules/expense/expense.module';
 import { CategoryModule } from './modules/category/category.module';
 
@@ -26,7 +27,7 @@ import { CategoryModule } from './modules/category/category.module';
         username: configService.get<string>('DB_USER'), // Dette manglede
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User, Income, Expense],
+        entities: [User, Income, Expense, Category],
         synchronize: true,
       }),
     }),

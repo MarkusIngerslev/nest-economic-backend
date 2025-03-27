@@ -1,4 +1,3 @@
-import { UUID } from 'crypto';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Role } from '../../enum/roles.enum';
 import { Income } from '../income/income.entity';

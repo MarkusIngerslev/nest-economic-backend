@@ -6,6 +6,8 @@ import { UpdateIncomeDto } from './dto/update-income.dto';
 import { Income } from './income.entity';
 import { User } from '../user/user.entity';
 import { UUID } from 'crypto';
+import { CategoryService } from '../category/category.service';
+import { CategoryType } from 'src/enum/category.enum';
 
 @Injectable()
 export class IncomeService {
@@ -14,14 +16,20 @@ export class IncomeService {
     private incomeRepo: Repository<Income>,
     @InjectRepository(User)
     private userRepo: Repository<User>,
+    private categoryService: CategoryService,
   ) {}
 
   async createIncome(userId: string, data: CreateIncomeDto) {
     const user = await this.userRepo.findOneOrFail({ where: { id: userId } });
+    const category = await this.categoryService.findOneByIdAndType(
+      data.categoryId,
+      CategoryType.INCOME,
+    );
 
     const income = this.incomeRepo.create({
       ...data,
       date: data.date ?? new Date(),
+      category,
       user,
     });
 

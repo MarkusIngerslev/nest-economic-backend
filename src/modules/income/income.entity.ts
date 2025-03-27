@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from '../user/user.entity';
+import { Category } from '../category/category.entity';
 
 @Entity()
 export class Income {
@@ -9,8 +10,8 @@ export class Income {
   @Column('decimal')
   amount: number;
 
-  @Column()
-  category: string;
+  @ManyToOne(() => Category, { eager: true })
+  category: Category;
 
   @Column({ nullable: true })
   description: string;

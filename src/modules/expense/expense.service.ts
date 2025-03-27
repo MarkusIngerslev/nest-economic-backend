@@ -6,6 +6,8 @@ import { UpdateExpenseDto } from './dtos/update-expense.dto';
 import { Expense } from './expense.entity';
 import { User } from '../user/user.entity';
 import { UUID } from 'crypto';
+import { CategoryService } from '../category/category.service';
+import { CategoryType } from 'src/enum/category.enum';
 
 @Injectable()
 export class ExpenseService {
@@ -14,14 +16,20 @@ export class ExpenseService {
     private expenseRepo: Repository<Expense>,
     @InjectRepository(User)
     private userRepo: Repository<User>,
+    private categoryService: CategoryService,
   ) {}
 
   async createExpense(userId: string, data: CreateExpenseDto) {
     const user = await this.userRepo.findOneOrFail({ where: { id: userId } });
+    const category = await this.categoryService.findOneByIdAndType(
+      data.categoryId,
+      CategoryType.EXPENSE,
+    );
 
     const expense = this.expenseRepo.create({
       ...data,
       date: data.date ?? new Date(),
+      category,
       user,
     });
 
