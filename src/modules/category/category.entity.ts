@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { CategoryType } from 'src/enum/category.enum';
+import { CategoryType } from 'src/helper/enum/category.enum';
 
 @Entity()
 export class Category {

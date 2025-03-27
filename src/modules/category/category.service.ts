@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './category.entity';
-import { CategoryType } from 'src/enum/category.enum';
+import { CategoryType } from 'src/helper/enum/category.enum';
 
 @Injectable()
 export class CategoryService {

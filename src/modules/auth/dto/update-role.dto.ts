@@ -1,5 +1,5 @@
 import { IsArray, IsEnum } from 'class-validator';
-import { Role } from '../../../enum/roles.enum';
+import { Role } from '../../../helper/enum/roles.enum';
 
 export class UpdateRoleDto {
   @IsArray()

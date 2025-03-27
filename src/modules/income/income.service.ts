@@ -7,7 +7,7 @@ import { Income } from './income.entity';
 import { User } from '../user/user.entity';
 import { UUID } from 'crypto';
 import { CategoryService } from '../category/category.service';
-import { CategoryType } from 'src/enum/category.enum';
+import { CategoryType } from 'src/helper/enum/category.enum';
 
 @Injectable()
 export class IncomeService {

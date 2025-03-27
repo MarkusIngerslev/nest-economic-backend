@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Role } from '../../enum/roles.enum';
+import { Role } from '../../helper/enum/roles.enum';
 import { Income } from '../income/income.entity';
 import { Expense } from '../expense/expense.entity';
 

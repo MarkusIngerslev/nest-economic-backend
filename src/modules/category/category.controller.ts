@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Query, UseGuards } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CategoryType } from 'src/enum/category.enum';
+import { CategoryType } from 'src/helper/enum/category.enum';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/guard/roles.guard';
-import { Role } from 'src/enum/roles.enum';
+import { Role } from 'src/helper/enum/roles.enum';
 
 @UseGuards(JwtGuard, RolesGuard)
 @Roles(Role.ADMIN)
