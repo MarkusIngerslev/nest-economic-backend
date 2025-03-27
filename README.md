@@ -196,12 +196,12 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement the endpoint for fetching a single expense
    - [x] Implement the endpoint for updating a single expense
    - [x] Implement the endpoint for deleting a single expense
-1. [ ] Implement the endpoints for the categories
-   - [ ] Implement the endpoint for fetching all categories
-   - [ ] Implement the endpoint for fetching a single category
-   - [ ] Implement the endpoint for creating a new category
-   - [ ] Implement the endpoint for updating a single category
-   - [ ] Implement the endpoint for deleting a single category
+1. [x] Implement the endpoints for the categories
+   - [x] Implement the endpoint for fetching all categories
+   - [x] Implement the endpoint for fetching a single category
+   - [x] Implement the endpoint for creating a new category (admin only)
+   - [x] Implement the endpoint for updating a single category (admin only)
+   - [x] Implement the endpoint for deleting a single category (admin only)
 1. [ ] Implement the endpoints for the statistics
    - [ ] Implement the endpoint for fetching the statistics
    - [ ] Implement the endpoint for fetching a specific months statistics
