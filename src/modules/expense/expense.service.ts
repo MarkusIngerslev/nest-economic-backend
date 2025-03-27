@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateExpenseDto } from './dtos/create-expense.dto';
 import { UpdateExpenseDto } from './dtos/update-expense.dto';
 import { Expense } from './expense.entity';
-import { User } from '../users/users.entity';
+import { User } from '../user/user.entity';
 import { UUID } from 'crypto';
 
 @Injectable()

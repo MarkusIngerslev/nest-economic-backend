@@ -9,7 +9,7 @@ import {
 
 import { Role } from '../roles/roles.enum';
 
-export class RegisterRequestDTO {
+export class RegisterRequestDto {
   @IsString()
   firstName: string;
 

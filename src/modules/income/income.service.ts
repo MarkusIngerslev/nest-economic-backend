@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateIncomeDto } from './dtos/create-income.dto';
-import { UpdateIncomeDto } from './dtos/update-income.dto';
+import { CreateIncomeDto } from './dto/create-income.dto';
+import { UpdateIncomeDto } from './dto/update-income.dto';
 import { Income } from './income.entity';
-import { User } from '../users/users.entity';
+import { User } from '../user/user.entity';
 import { UUID } from 'crypto';
 
 @Injectable()

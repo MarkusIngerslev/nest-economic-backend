@@ -13,8 +13,8 @@ import {
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/guard/roles.guard';
 import { JwtGuard } from '../auth/guard/jwt.guard';
-import { CreateIncomeDto } from './dtos/create-income.dto';
-import { UpdateIncomeDto } from './dtos/update-income.dto';
+import { CreateIncomeDto } from './dto/create-income.dto';
+import { UpdateIncomeDto } from './dto/update-income.dto';
 import { Role } from '../auth/roles/roles.enum';
 import { UUID } from 'crypto';
 

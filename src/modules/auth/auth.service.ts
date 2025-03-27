@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import { User } from '../users/users.entity';
+import { User } from '../user/user.entity';
 import { AccessToken } from './types/AccessToken';
-import { UsersService } from '../users/users.service';
-import { RegisterRequestDTO } from './dtos/register-request.dto';
-import { UpdateRoleDTO } from './dtos/update-role.dto';
+import { UsersService } from '../user/user.service';
+import { RegisterRequestDto } from './dto/register-request.dto';
+import { UpdateRoleDto } from './dto/update-role.dto';
 import { Role } from './roles/roles.enum';
 import { UUID } from 'crypto';
 
@@ -33,7 +33,7 @@ export class AuthService {
     return { access_token: this.jwtService.sign(payload) };
   }
 
-  async register(user: RegisterRequestDTO): Promise<AccessToken> {
+  async register(user: RegisterRequestDto): Promise<AccessToken> {
     const existingUser = await this.usersService.findOneByEmail(user.email);
     if (existingUser) {
       throw new BadRequestException('email already exists');
@@ -55,7 +55,7 @@ export class AuthService {
     return this.login(newUser);
   }
 
-  async updateRole(id: UUID, updateRoleDTO: UpdateRoleDTO): Promise<User> {
+  async updateRole(id: UUID, updateRoleDTO: UpdateRoleDto): Promise<User> {
     const user = await this.usersService.findOneById(id);
     if (!user) {
       throw new BadRequestException('User not found');

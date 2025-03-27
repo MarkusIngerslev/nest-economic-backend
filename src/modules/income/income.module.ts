@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Income } from './income.entity';
 import { IncomeService } from './income.service';
 import { IncomeController } from './income.controller';
-import { User } from '../users/users.entity';
+import { User } from '../user/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Income, User])],

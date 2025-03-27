@@ -11,15 +11,15 @@ import {
 import { AuthService } from './auth.service';
 
 import { AuthGuard } from '@nestjs/passport';
-import { RegisterRequestDTO } from './dtos/register-request.dto';
-import { LoginResponseDTO } from './dtos/login-response.dto';
-import { RegisterResponseDTO } from './dtos/register-response.dto';
+import { RegisterRequestDto } from './dto/register-request.dto';
+import { LoginResponseDto } from './dto/login-response.dto';
+import { RegisterResponseDto } from './dto/register-response.dto';
 import { Public } from './decorators/public.decorator';
 import { JwtGuard } from './guard/jwt.guard';
 import { RolesGuard } from './guard/roles.guard';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from './roles/roles.enum';
-import { UpdateRoleDTO } from './dtos/update-role.dto';
+import { UpdateRoleDto } from './dto/update-role.dto';
 import { UUID } from 'crypto';
 
 @Controller('auth')
@@ -29,15 +29,15 @@ export class AuthController {
   @Public()
   @Post('login')
   @UseGuards(AuthGuard('local'))
-  async login(@Request() req): Promise<LoginResponseDTO | BadRequestException> {
+  async login(@Request() req): Promise<LoginResponseDto | BadRequestException> {
     return this.authService.login(req.user);
   }
 
   @Public()
   @Post('register')
   async register(
-    @Body() registerBody: RegisterRequestDTO,
-  ): Promise<RegisterResponseDTO | BadRequestException> {
+    @Body() registerBody: RegisterRequestDto,
+  ): Promise<RegisterResponseDto | BadRequestException> {
     return await this.authService.register(registerBody);
   }
 
@@ -46,7 +46,7 @@ export class AuthController {
   @Roles(Role.ADMIN)
   async adminUpdateRole(
     @Param('id') id: UUID,
-    @Body() updateRoleBody: UpdateRoleDTO,
+    @Body() updateRoleBody: UpdateRoleDto,
   ) {
     return await this.authService.updateRole(id, updateRoleBody);
   }
