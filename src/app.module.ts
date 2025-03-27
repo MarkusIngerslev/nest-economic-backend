@@ -9,6 +9,8 @@ import { RolesGuard } from './modules/auth/guard/roles.guard';
 import { User } from './modules/users/users.entity';
 import { IncomeModule } from './modules/income/income.module';
 import { Income } from './modules/income/income.entity';
+import { Expense } from './modules/expense/expense.entity';
+import { ExpenseModule } from './modules/expense/expense.module';
 
 @Module({
   imports: [
@@ -23,13 +25,14 @@ import { Income } from './modules/income/income.entity';
         username: configService.get<string>('DB_USER'), // Dette manglede
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User, Income],
+        entities: [User, Income, Expense],
         synchronize: true,
       }),
     }),
     UsersModule,
     AuthModule,
     IncomeModule,
+    ExpenseModule,
   ],
   providers: [
     {

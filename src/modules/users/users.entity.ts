@@ -2,6 +2,7 @@ import { UUID } from 'crypto';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Role } from '../auth/roles/roles.enum';
 import { Income } from '../income/income.entity';
+import { Expense } from '../expense/expense.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -29,4 +30,7 @@ export class User {
 
   @OneToMany(() => Income, (income) => income.user)
   incomes?: Income[];
+
+  @OneToMany(() => Expense, (expense) => expense.user)
+  expense?: Expense[];
 }

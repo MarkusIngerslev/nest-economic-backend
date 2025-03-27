@@ -18,8 +18,7 @@ import { UpdateIncomeDto } from './dtos/update-income.dto';
 import { Role } from '../auth/roles/roles.enum';
 import { UUID } from 'crypto';
 
-@UseGuards(JwtGuard)
-@UseGuards(RolesGuard)
+@UseGuards(JwtGuard, RolesGuard)
 @Controller('income')
 export class IncomeController {
   constructor(private readonly incomeService: IncomeService) {}
