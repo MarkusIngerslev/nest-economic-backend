@@ -45,13 +45,13 @@ Endpoints for managing incomes and expenses.
 
 #### Income
 
-- `GET /incomes` - Fetch all incomes
-- `GET /incomes/me` - Fetch all incomes for logged in user
-- `GET /incomes/:id` - Fetch a single income
-- `GET /incomes/user/:userId` - Fetch all incomes for a single user (admin only)
-- `POST /incomes` - Create a new income
-- `PUT /incomes/:id` - Update a single income
-- `DELETE /incomes/:id` - Delete a single income
+- `GET /income` - Fetch all incomes (admin only)
+- `GET /income/me` - Fetch all incomes for logged in user
+- `GET /income/:id` - Fetch a single income
+- `GET /income/user/:userId` - Fetch all incomes for a single user (admin only)
+- `POST /income` - Create a new income
+- `PUT /income/:id` - Update a single income
+- `DELETE /income/:id` - Delete a single income
 
 ##### JSON Schema for income
 
@@ -66,11 +66,13 @@ Endpoints for managing incomes and expenses.
 
 #### Expense
 
-- `GET /expenses` - Fetch all expenses
-- `POST /expenses` - Create a new expense
-- `GET /expenses/:id` - Fetch a single expense
-- `PUT /expenses/:id` - Update a single expense
-- `DELETE /expenses/:id` - Delete a single expense
+- `GET /expense` - Fetch all expenses (admin only)
+- `GET /expense/me` - Fetch all expenses for logged in user
+- `GET /expense/:id` - Fetch a single expense
+- `GET /expense/user/:userId` - Fetch all expenses for a single user (admin only)
+- `POST /expense` - Create a new expense
+- `PUT /expense/:id` - Update a single expense
+- `DELETE /expense/:id` - Delete a single expense
 
 ##### JSON Schema for expense
 
@@ -186,12 +188,14 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement the endpoint for fetching a single income
    - [x] Implement the endpoint for updating a single income
    - [x] Implement the endpoint for deleting a single income
-1. [ ] Implement the endpoints for the expenses
-   - [ ] Implement the endpoint for fetching all expenses
-   - [ ] Implement the endpoint for fetching a single expense
-   - [ ] Implement the endpoint for creating a new expense
-   - [ ] Implement the endpoint for updating a single expense
-   - [ ] Implement the endpoint for deleting a single expense
+1. [x] Implement the endpoints for the expenses
+   - [x] Implement the endpoint for fetching all incomes (admin only)
+   - [x] Implement the endpoint for fetching all of a users expenses
+   - [x] Implement the endpoint for fetching a single users expenses (admin only)
+   - [x] Implement the endpoint for creating a new expense
+   - [x] Implement the endpoint for fetching a single expense
+   - [x] Implement the endpoint for updating a single expense
+   - [x] Implement the endpoint for deleting a single expense
 1. [ ] Implement the endpoints for the categories
    - [ ] Implement the endpoint for fetching all categories
    - [ ] Implement the endpoint for fetching a single category
