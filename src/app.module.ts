@@ -11,6 +11,7 @@ import { IncomeModule } from './modules/income/income.module';
 import { Income } from './modules/income/income.entity';
 import { Expense } from './modules/expense/expense.entity';
 import { ExpenseModule } from './modules/expense/expense.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ExpenseModule } from './modules/expense/expense.module';
     AuthModule,
     IncomeModule,
     ExpenseModule,
+    CategoryModule,
   ],
   providers: [
     {

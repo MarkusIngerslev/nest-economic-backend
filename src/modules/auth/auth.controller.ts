@@ -18,7 +18,7 @@ import { Public } from './decorators/public.decorator';
 import { JwtGuard } from './guard/jwt.guard';
 import { RolesGuard } from './guard/roles.guard';
 import { Roles } from './decorators/roles.decorator';
-import { Role } from './roles/roles.enum';
+import { Role } from '../../enum/roles.enum';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { UUID } from 'crypto';
 

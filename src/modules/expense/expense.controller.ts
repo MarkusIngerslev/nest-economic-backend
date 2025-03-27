@@ -15,7 +15,7 @@ import { RolesGuard } from '../auth/guard/roles.guard';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { CreateExpenseDto } from './dtos/create-expense.dto';
 import { UpdateExpenseDto } from './dtos/update-expense.dto';
-import { Role } from '../auth/roles/roles.enum';
+import { Role } from '../../enum/roles.enum';
 import { UUID } from 'crypto';
 
 @UseGuards(JwtGuard, RolesGuard)

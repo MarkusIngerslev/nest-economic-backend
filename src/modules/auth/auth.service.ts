@@ -6,7 +6,7 @@ import { AccessToken } from './types/AccessToken';
 import { UsersService } from '../user/user.service';
 import { RegisterRequestDto } from './dto/register-request.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { Role } from './roles/roles.enum';
+import { Role } from '../../enum/roles.enum';
 import { UUID } from 'crypto';
 
 @Injectable()

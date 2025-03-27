@@ -7,7 +7,7 @@ import {
   IsEnum,
 } from 'class-validator';
 
-import { Role } from '../roles/roles.enum';
+import { Role } from '../../../enum/roles.enum';
 
 export class RegisterRequestDto {
   @IsString()

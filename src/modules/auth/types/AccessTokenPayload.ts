@@ -1,5 +1,5 @@
 import { UUID } from 'crypto';
-import { Role } from '../roles/roles.enum';
+import { Role } from '../../../enum/roles.enum';
 
 export type AccessTokenPayload = {
   id: UUID;
