@@ -58,7 +58,7 @@ Endpoints for managing incomes and expenses.
 ```json
 {
   "amount": 25000,
-  "category": "Løn",
+  "categoryId": "360ef06c-d673-4457-b1e0-b6ea1c7b023f",
   "date": "2025-03-01",
   "description": "Løn fra arbejde"
 }
@@ -79,7 +79,7 @@ Endpoints for managing incomes and expenses.
 ```json
 {
   "amount": 150,
-  "category": "Mad",
+  "categoryId": "360ef06c-d673-4457-b1e0-b6ea1c7b023f",
   "date": "2025-03-02",
   "description": "McDonalds"
 }
@@ -87,17 +87,18 @@ Endpoints for managing incomes and expenses.
 
 #### Categories
 
-- `GET /categories` - Fetch all categories
-- `POST /categories` - Create a new category
-- `GET /categories/:id` - Fetch a single category
-- `PUT /categories/:id` - Update a single category
-- `DELETE /categories/:id` - Delete a single category
+- `GET /category` - Fetch all categories
+- `POST /category` - Create a new category
+- `GET /category/:id` - Fetch a single category
+- `PUT /category/:id` - Update a single category
+- `DELETE /category/:id` - Delete a single category
 
 ##### JSON Schema for category
 
 ```json
 {
-  "name": "Transport"
+  "name": "Transport",
+  "type": "expense"
 }
 ```
 
@@ -118,7 +119,7 @@ Endpoints for managing incomes and expenses.
 }
 ```
 
-#### Transaktions
+#### Transactions
 
 - `GET /transactions` - Fetch all transactions
 - `GET /transactions/:id` - Fetch a single transaction
