@@ -1,6 +1,6 @@
 import { IsOptional, IsNumber, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
-import { IsDateNotInFuture } from 'src/validators/is-date-not-in-future';
+import { IsDateNotInFuture } from 'src/helper/validators/is-date-not-in-future';
 
 export class UpdateIncomeDto {
   @IsOptional()
