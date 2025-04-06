@@ -1,16 +1,11 @@
-import {
-  Controller,
-  Get,
-  UseGuards,
-  Request,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Get, UseGuards, Request } from '@nestjs/common';
 import { UsersService } from './user.service';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { RolesGuard } from '../auth/guard/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../../helper/enum/roles.enum';
 import { UserProfileDto } from './dto/user-profile.dto';
+import { plainToInstance } from 'class-transformer';
 
 @UseGuards(JwtGuard)
 @Controller('users')
@@ -28,6 +23,9 @@ export class UsersController {
   async getProfile(@Request() req) {
     const user = await this.usersService.findById(req.user.id);
 
-    return user;
+    // Uses class-transformer to only expose the properties decorated with @Expose()
+    return plainToInstance(UserProfileDto, user, {
+      excludeExtraneousValues: true,
+    });
   }
 }
