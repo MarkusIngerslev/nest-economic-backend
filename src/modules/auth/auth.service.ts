@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   async updateRole(id: UUID, updateRoleDTO: UpdateRoleDto): Promise<User> {
-    const user = await this.usersService.findOneById(id);
+    const user = await this.usersService.findById(id);
     if (!user) {
       throw new BadRequestException('User not found');
     }
