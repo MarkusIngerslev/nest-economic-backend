@@ -22,10 +22,30 @@ export class UserProfileDto {
   @Expose()
   roles: Role[];
 
+  @Expose()
+  phone?: string;
+
+  @Expose()
+  address?: string;
+
+  @Expose()
+  birthDate?: Date;
+
+  @Expose()
+  profilePictureUrl?: string;
+
+  @Expose()
+  city?: string;
+
+  @Expose()
+  postalCode?: string;
+
+  @Expose()
+  country?: string;
+
   // Add other properties as needed
   // For example:
-  // address: string;
   // createdAt: Date;
   // updatedAt: Date;
-  // phoneNumber: string;
+
 }

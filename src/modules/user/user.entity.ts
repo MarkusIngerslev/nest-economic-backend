@@ -27,6 +27,33 @@ export class User {
   })
   roles: Role[];
 
+  @Column({ nullable: true })
+  phone?: string;
+
+  @Column({ nullable: true })
+  address?: string;
+
+  @Column({ nullable: true })
+  birthDate?: Date;
+
+  @Column({ nullable: true })
+  profilePictureUrl?: string;
+
+  // @Column({ nullable: true })
+  // createdAt?: Date;
+
+  // @Column({ nullable: true })
+  // updatedAt?: Date;
+
+  @Column({ nullable: true })
+  city?: string;
+
+  @Column({ nullable: true })
+  postalCode?: string;
+
+  @Column({ nullable: true })
+  country?: string;
+
   @OneToMany(() => Income, (income) => income.user)
   incomes?: Income[];
 
