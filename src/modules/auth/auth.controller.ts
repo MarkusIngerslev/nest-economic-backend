@@ -3,8 +3,8 @@ import {
   Body,
   Controller,
   Param,
+  Patch,
   Post,
-  Put,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -41,7 +41,7 @@ export class AuthController {
     return await this.authService.register(registerBody);
   }
 
-  @Put('admin/update-user-roles/:id')
+  @Patch('admin/update-user-roles/:id')
   @UseGuards(JwtGuard, RolesGuard)
   @Roles(Role.ADMIN)
   async adminUpdateRole(

@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Role } from '../../helper/enum/roles.enum';
 import { Income } from '../income/income.entity';
 import { Expense } from '../expense/expense.entity';
@@ -39,12 +46,6 @@ export class User {
   @Column({ nullable: true })
   profilePictureUrl?: string;
 
-  // @Column({ nullable: true })
-  // createdAt?: Date;
-
-  // @Column({ nullable: true })
-  // updatedAt?: Date;
-
   @Column({ nullable: true })
   city?: string;
 
@@ -53,6 +54,12 @@ export class User {
 
   @Column({ nullable: true })
   country?: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @OneToMany(() => Income, (income) => income.user)
   incomes?: Income[];
