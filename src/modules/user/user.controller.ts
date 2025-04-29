@@ -1,10 +1,18 @@
-import { Controller, Get, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Patch,
+  UseGuards,
+  Request,
+  Body,
+} from '@nestjs/common';
 import { UsersService } from './user.service';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { RolesGuard } from '../auth/guard/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../../helper/enum/roles.enum';
 import { UserProfileDto } from './dto/user-profile.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { plainToInstance } from 'class-transformer';
 
 @UseGuards(JwtGuard)
@@ -27,5 +35,10 @@ export class UsersController {
     return plainToInstance(UserProfileDto, user, {
       excludeExtraneousValues: true,
     });
+  }
+
+  @Patch('update-profile')
+  updateUserProfile(@Request() req, @Body() dto: UpdateUserDto) {
+    return this.usersService.update(req.user.id, dto);
   }
 }

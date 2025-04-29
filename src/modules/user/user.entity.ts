@@ -35,7 +35,7 @@ export class User {
   roles: Role[];
 
   @Column({ nullable: true })
-  phone?: string;
+  phone?: number;
 
   @Column({ nullable: true })
   address?: string;
