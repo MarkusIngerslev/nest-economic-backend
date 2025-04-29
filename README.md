@@ -35,7 +35,8 @@ Endpoints for authentication and user management.
 
 - `GET /users` - Fetch information about all users (admin only)
 - `GET /users/profile` - Fetch information about the current user
-- `PUT /auth/admin/update-user-roles/:id` - Update a single users role (admin only)
+- `PATCH /users/update-profile` - Update information about the current user
+- `PATCH /auth/admin/update-user-roles/:id` - Update a single users role (admin only)
 - `POST /auth/register` - Register a new user **firstName**, **lastName**, **email**, **password**
 - `POST /auth/login` - Login and get JWT-token
 
@@ -97,6 +98,7 @@ Endpoints for managing incomes and expenses.
 
 ```json
 {
+  "id": "360ef06c-d673-4457-b1e0-b6ea1c7b023f",
   "name": "Transport",
   "type": "expense"
 }
@@ -180,6 +182,7 @@ This todo list is a list of things left to implement in the backend.
    - [x] Implement the endpoint for fetching the current logged ind user
    - [x] Implement the endpoint for fetching all users (admin only)
    - [x] Implement the endpoint for updating a single user role (admin only)
+   - [x] Implement the endpoint for updating the current logged in user
    - [x] Implement the endpoint for logging in
 1. [x] Implement the endpoints for the incomes
    - [x] Implement the endpoint for fetching all incomes (admin only)
