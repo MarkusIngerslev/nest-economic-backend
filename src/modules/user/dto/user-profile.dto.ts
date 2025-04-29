@@ -43,9 +43,9 @@ export class UserProfileDto {
   @Expose()
   country?: string;
 
-  // Add other properties as needed
-  // For example:
-  // createdAt: Date;
-  // updatedAt: Date;
+  @Exclude()
+  createdAt: Date;
 
+  @Exclude()
+  updatedAt: Date;
 }
