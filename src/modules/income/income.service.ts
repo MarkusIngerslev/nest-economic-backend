@@ -78,6 +78,24 @@ export class IncomeService {
     isAdmin = false,
   ) {
     const income = await this.getIncomeByIdForUser(incomeId, userId, isAdmin);
+
+    const { categoryId, ...otherUpdateData } = dto;
+
+    if (categoryId) {
+      const category = await this.categoryService.findOneByIdAndType(
+        categoryId,
+        CategoryType.INCOME,
+      );
+
+      if (!category) {
+        throw new NotFoundException(
+          `Category with ID ${categoryId} not found or is not an income category`,
+        );
+      }
+
+      income.category = category;
+    }
+
     Object.assign(income, dto);
     return this.incomeRepo.save(income);
   }
