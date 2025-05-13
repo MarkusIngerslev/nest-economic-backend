@@ -82,7 +82,23 @@ export class ExpenseService {
       userId,
       isAdmin,
     );
-    Object.assign(expense, dto);
+
+    const { categoryId, ...otherUpdateData } = dto;
+
+    if (categoryId) {
+      const category = await this.categoryService.findOneByIdAndType(
+        categoryId,
+        CategoryType.EXPENSE, // Sørg for at bruge CategoryType.EXPENSE
+      );
+      if (!category) {
+        throw new NotFoundException(
+          `Category with ID ${categoryId} not found or is not an expense category`,
+        );
+      }
+      expense.category = category;
+    }
+
+    Object.assign(expense, otherUpdateData);
     return this.expenseRepo.save(expense);
   }
 

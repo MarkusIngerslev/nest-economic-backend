@@ -1,4 +1,4 @@
-import { IsOptional, IsNumber, IsString } from 'class-validator';
+import { IsOptional, IsNumber, IsString, IsUUID } from 'class-validator';
 import { Type } from 'class-transformer';
 import { IsDateNotInFuture } from 'src/helper/validators/is-date-not-in-future';
 
@@ -8,8 +8,8 @@ export class UpdateExpenseDto {
   amount?: number;
 
   @IsOptional()
-  @IsString()
-  category?: string;
+  @IsUUID()
+  categoryId?: string;
 
   @IsOptional()
   @IsString()
