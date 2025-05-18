@@ -24,6 +24,7 @@ export class ExpenseService {
     const category = await this.categoryService.findOneByIdAndType(
       data.categoryId,
       CategoryType.EXPENSE,
+      userId,
     );
 
     const expense = this.expenseRepo.create({
@@ -89,6 +90,7 @@ export class ExpenseService {
       const category = await this.categoryService.findOneByIdAndType(
         categoryId,
         CategoryType.EXPENSE, // Sørg for at bruge CategoryType.EXPENSE
+        userId,
       );
       if (!category) {
         throw new NotFoundException(

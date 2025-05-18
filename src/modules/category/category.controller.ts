@@ -29,48 +29,62 @@ export class CategoryController {
   /***************/
 
   @Get()
-  async getAll(@Query('type') type?: CategoryType) {
+  async getAll(@Req() req: any, @Query('type') type?: CategoryType) {
+    const userId = req.user.id; // Hent userId fra req.user
     if (type) {
-      return this.categoryService.findByType(type);
+      return this.categoryService.findByType(type, userId);
     }
-    return this.categoryService.findAll();
+    return this.categoryService.findAll(userId);
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: string) {
-    return this.categoryService.findById(id);
+  async getOne(@Param('id') id: string, @Req() req: any) {
+    const userId = req.user.id; // Hent userId fra req.user
+    const userRoles = req.user.roles || []; // Hent roller fra req.user, antager det er et array
+    // Tjek om brugeren er admin for at tillade adgang til alle kategorier
+    const isAdmin = userRoles.includes(Role.ADMIN);
+    return this.categoryService.findById(id, userId, isAdmin);
   }
-
-  // @Get('search')
 
   /****************/
   /* POST Methods */
   /****************/
 
-  @Roles(Role.ADMIN)
   @Post()
-  async create(@Body() body: { name: string; type: CategoryType }) {
-    return this.categoryService.create(body.name, body.type);
+  async create(
+    @Body() body: { name: string; type: CategoryType },
+    @Req() req: any,
+  ) {
+    const userId = req.user.id; // Hent userId fra req.user
+    return this.categoryService.create(body.name, body.type, userId);
   }
 
   /****************/
   /* PATCH Method */
   /****************/
 
-  @Roles(Role.ADMIN)
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
-    return this.categoryService.updateCategory(id, dto);
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateCategoryDto,
+    @Req() req: any,
+  ) {
+    const userId = req.user.id; // Hent userId fra req.user
+    const userRoles = req.user.roles || []; // Hent roller fra req.user
+    const isAdmin = userRoles.includes(Role.ADMIN);
+    return this.categoryService.updateCategory(id, dto, userId, isAdmin);
   }
 
   /*****************/
   /* DELETE Method */
   /*****************/
 
-  @Roles(Role.ADMIN)
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    await this.categoryService.deleteCategory(id);
+  async delete(@Param('id') id: string, @Req() req: any) {
+    const userId = req.user.id; // Hent userId fra req.user
+    const userRoles = req.user.roles || []; // Hent roller fra req.user
+    const isAdmin = userRoles.includes(Role.ADMIN);
+    await this.categoryService.deleteCategory(id, userId, isAdmin);
     return { message: 'Category deleted successfully' };
   }
 }

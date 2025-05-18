@@ -24,6 +24,7 @@ export class IncomeService {
     const category = await this.categoryService.findOneByIdAndType(
       data.categoryId,
       CategoryType.INCOME,
+      userId,
     );
 
     const income = this.incomeRepo.create({
@@ -85,6 +86,7 @@ export class IncomeService {
       const category = await this.categoryService.findOneByIdAndType(
         categoryId,
         CategoryType.INCOME,
+        userId,
       );
 
       if (!category) {
