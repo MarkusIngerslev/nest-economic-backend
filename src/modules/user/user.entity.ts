@@ -9,6 +9,7 @@ import {
 import { Role } from '../../helper/enum/roles.enum';
 import { Income } from '../income/income.entity';
 import { Expense } from '../expense/expense.entity';
+import { Category } from '../category/category.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -66,4 +67,7 @@ export class User {
 
   @OneToMany(() => Expense, (expense) => expense.user)
   expense?: Expense[];
+
+  @OneToMany(() => Category, (category) => category.user)
+  categories?: Category[];
 }
