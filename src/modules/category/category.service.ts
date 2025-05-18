@@ -1,6 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CategoryType } from 'src/helper/enum/category.enum';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -51,6 +55,24 @@ export class CategoryService {
 
   async deleteCategory(id: string): Promise<void> {
     const category = await this.findById(id);
-    await this.categoryRepo.remove(category);
+    try {
+      await this.categoryRepo.remove(category);
+    } catch (error) {
+      if (error instanceof QueryFailedError) {
+        const driverError = error as any; // Type assertion to access driverError
+
+        if (
+          driverError.driverError?.code === '23503' || // Typisk for PostgreSQL
+          driverError.message?.includes('FOREIGN KEY constraint failed') || // Typisk for SQLite
+          driverError.message?.toLowerCase().includes('foreign key constraint') // Mere generelt
+        ) {
+          throw new ConflictException(
+            'Denne kategori kan ikke slettes, da den er i brug i en af enten indtægterne eller udgifterne.',
+          );
+        }
+      }
+      // Hvis det er en anden type fejl, kastes den videre
+      throw error;
+    }
   }
 }
