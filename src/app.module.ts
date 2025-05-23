@@ -13,6 +13,7 @@ import { Expense } from './modules/expense/expense.entity';
 import { Category } from './modules/category/category.entity';
 import { ExpenseModule } from './modules/expense/expense.module';
 import { CategoryModule } from './modules/category/category.module';
+import { AiModule } from './modules/ai/ai.module';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { CategoryModule } from './modules/category/category.module';
         type: 'postgres',
         host: configService.get<string>('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USER'), // Dette manglede
+        username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [User, Income, Expense, Category],
@@ -36,6 +37,7 @@ import { CategoryModule } from './modules/category/category.module';
     IncomeModule,
     ExpenseModule,
     CategoryModule,
+    AiModule,
   ],
   providers: [
     {
