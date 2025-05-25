@@ -32,10 +32,13 @@ export class AiService {
   async getChatCompletion(message: string): Promise<any> {
     try {
       const chatCompletion = await this.openai.chat.completions.create({
-        model: 'gpt-3.5-turbo', // Her kan modellen ændre til den ønskede
-        messages: [{ role: 'user', content: message }],
-        // max_tokens: 100, // Juster max_tokens efter behov
-        // temperature: 0.4, // Juster temperature for at styre kreativiteten mellem 0 og 1
+        model: 'gpt-4', // Her kan modellen ændre til den ønskede
+        messages: [
+          { role: 'system', content: 'Du er en peronslig budgetrådgiver.' },
+          { role: 'user', content: message },
+        ],
+        temperature: 0.4, // Juster temperature for at styre kreativiteten mellem 0 og 1
+        max_tokens: 500, // Juster max_tokens efter behov
       });
 
       // SDK'en returnerer allerede den parsede data, så .data er ikke nødvendig som med axios
