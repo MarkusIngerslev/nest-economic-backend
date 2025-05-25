@@ -18,15 +18,20 @@ export class AiController {
       createAiDto.message,
     );
 
-    // Formatere svaret fra OpenAI
-    if (gptResponse.choices && gptResponse.choices.length > 0) {
+    // Formatere svaret fra OpenAI SDK
+    if (
+      gptResponse.choices &&
+      gptResponse.choices.length > 0 &&
+      gptResponse.choices[0].message
+    ) {
       return {
         reply: gptResponse.choices[0].message.content,
+        fullResponse: gptResponse,
       };
     }
     return {
-      reply: 'No response content recived from AI.',
-      fullResponse: gptResponse,
+      reply: 'No response content received from AI.',
+      fullResponse: gptResponse, // For debugging
     };
   }
 }
