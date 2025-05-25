@@ -46,7 +46,10 @@ importers:
         version: 0.14.1
       dotenv:
         specifier: ^16.4.7
-        version: 16.4.7
+        version: 16.5.0
+      openai:
+        specifier: ^4.103.0
+        version: 4.103.0
       passport:
         specifier: ^0.7.0
         version: 0.7.0
