@@ -31,10 +31,15 @@ export class AiService {
 
   async getChatCompletion(message: string): Promise<any> {
     try {
+      this.logger.log(`Modtager simpel besked: "${message}"`);
       const chatCompletion = await this.openai.chat.completions.create({
         model: 'gpt-4', // Her kan modellen ændre til den ønskede
         messages: [
-          { role: 'system', content: 'Du er en peronslig budgetrådgiver.' },
+          {
+            role: 'system',
+            content:
+              'Du er en hjælpsom assistent som kan mange forskellige ting, men er særlig god til økonomi og økonomiske råd.',
+          },
           { role: 'user', content: message },
         ],
         temperature: 0.4, // Juster temperature for at styre kreativiteten mellem 0 og 1
@@ -44,22 +49,60 @@ export class AiService {
       // SDK'en returnerer allerede den parsede data, så .data er ikke nødvendig som med axios
       return chatCompletion;
     } catch (error) {
-      if (error instanceof APIError) {
-        // Håndter specifikke OpenAI API fejl
-        this.logger.error(
-          `OpenAI API Error: ${error.status} ${error.name} ${error.message}`,
-          error.stack,
-        );
-        throw new InternalServerErrorException(
-          `Failed to get response from OpenAI: ${error.message}`,
-        );
+      this.handleError(error, 'getChatCompletion');
+    }
+  }
+
+  async getChatCompletionWithContext(
+    message: string,
+    contextData?: any,
+  ): Promise<any> {
+    try {
+      this.logger.log(
+        `Modtager besked med kontekst: "${message}", Data: ${JSON.stringify(contextData)}`,
+      );
+      const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
+        { role: 'system', content: 'Du er en personlig budgetrådgiver.' }, // Specifik systembesked
+      ];
+
+      if (contextData) {
+        const dataString = JSON.stringify(contextData, null, 2);
+        messages.push({
+          role: 'system',
+          content: `Her er relevant økonomisk data for brugeren, som du kan bruge i dit svar:\n${dataString}`,
+        });
       }
 
-      // Håndter andre uventede fejl
-      this.logger.error('Unknown error communicating with OpenAI:', error);
+      messages.push({ role: 'user', content: message });
+
+      const chatCompletion = await this.openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: messages,
+        temperature: 0.4,
+        max_tokens: 1000, // Overvej om max_tokens skal være højere med kontekst
+      });
+      return chatCompletion;
+    } catch (error) {
+      this.handleError(error, 'getChatCompletionWithContext');
+    }
+  }
+
+  private handleError(error: any, methodName: string) {
+    if (error instanceof APIError) {
+      this.logger.error(
+        `OpenAI API Error in ${methodName}: ${error.status} ${error.name} ${error.message}`,
+        error.stack,
+      );
       throw new InternalServerErrorException(
-        'An unexpected error occurred while communicating with OpenAI.',
+        `Failed to get response from OpenAI: ${error.message}`,
       );
     }
+    this.logger.error(
+      `Unknown error in ${methodName} communicating with OpenAI:`,
+      error,
+    );
+    throw new InternalServerErrorException(
+      'An unexpected error occurred while communicating with OpenAI.',
+    );
   }
 }
