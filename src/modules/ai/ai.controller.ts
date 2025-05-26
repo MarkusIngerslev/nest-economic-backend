@@ -16,12 +16,14 @@ export class AiController {
 
   @Post('completion')
   async craeteCompletion(@Body() createAiDto: CreateChatCompletionDto) {
+    const { message, history } = createAiDto; // Udpak også history
     this.logger.log(
-      `Enpoint /ai/completion kaldt med besked: "${createAiDto.message}"`,
+      `Enpoint /ai/completion kaldt med besked: "${message}"${history ? ` og ${history.length} historikbeskeder.` : '.'}`,
     );
 
     const gptResponse = await this.aiService.getChatCompletion(
-      createAiDto.message,
+      message,
+      history, // Send historikken med
     );
 
     // Formatere svaret med OpenAI SDK
@@ -40,20 +42,20 @@ export class AiController {
   async createCompletionWithContext(
     @Body() createAiDto: CreateChatCompletionDto,
   ) {
-    const { message, contextData } = createAiDto;
+    const { message, contextData, history } = createAiDto;
     this.logger.log(
-      `Endpoint /ai/contextual-completion kaldt med besked: "${message}" og contextData`,
+      `Endpoint /ai/contextual-completion kaldt med besked: "${message}"${contextData ? ' og contextData' : ''}${history ? ` og ${history.length} historikbeskeder.` : '.'}`,
     );
 
     const gptResponse = await this.aiService.getChatCompletionWithContext(
       message,
       contextData,
+      history,
     );
 
     if (gptResponse?.choices?.[0]?.message?.content) {
       return {
         reply: gptResponse.choices[0].message.content,
-        // Overvej om du vil returnere fullResponse her også
       };
     }
     return {
